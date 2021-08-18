@@ -30,6 +30,8 @@ function submit() {
   var info_score2 = document.getElementById("info_score2").value;
   var info_region = document.getElementById("info_region").value;
   var info_money = document.getElementById("info_money").value;
+  info_score1 *= 1;
+  info_score2 *= 1;
   if (
     info_name == "" ||
     info_age == "" ||
@@ -42,6 +44,14 @@ function submit() {
   } else if (info_id.length != 10) {
     alert("학번은 숫자 10자리를 입력해주세요.");
     return;
+  } else if (
+    info_score1 < 0 ||
+    info_score1 > 4.5 ||
+    info_score2 < 0 ||
+    info_score2 > 4.5
+  ) {
+    alert("학점은 0과 4.5 사이여야 합니다.");
+    return;
   }
 
   const request = new XMLHttpRequest();
@@ -50,6 +60,10 @@ function submit() {
       // response 받기
       var rsp = request.responseText;
       data = JSON.parse(rsp);
+
+      // 그림 지우기
+      var pic = document.getElementById("before_search");
+      pic.style.display = "none";
 
       // 추천 장학금 개수 세기
       var cnt_sch = 0;
@@ -125,7 +139,7 @@ function submit() {
 
   request.open(
     "GET",
-    `http://johnbuzz98.iptime.org:9800/main_request?name=${info_name}&age=${info_age}&sex=${info_sex}&id_students=${info_id}&major=${info_mj}&last_score=${info_score1}&avg_score=${info_score2}&place=${info_region}&income=${info_money}&semester=${info_sem}`,
+    `http://118.67.129.218:5000//main_request?name=${info_name}&age=${info_age}&sex=${info_sex}&id_students=${info_id}&major=${info_mj}&last_score=${info_score1}&avg_score=${info_score2}&place=${info_region}&income=${info_money}&semester=${info_sem}`,
     true
   );
   request.send();
@@ -136,6 +150,7 @@ function scholarship(a, b) {
   var target = document.querySelector("#set_point2");
   var target2 = document.querySelector("#shadow2");
   target.style.display = "flex";
+  $("#set_point2").scrollTop(0);
   target2.style.display = "flex";
   $("#x2").click(function () {
     target.style.display = "none";
@@ -161,6 +176,7 @@ function scholarship(a, b) {
   var feature = esch.feature;
   var feature_other = esch.feature_specified;
 
+  if (crt == "해당없음") crt = "소득 및 성적과 관계없는";
   if (rcd == "필요합니다") rcd = "필요합니다.";
   $("#d_info").text(`${date_start} ~ ${date_end}`);
   if (price == "0") {
@@ -207,6 +223,8 @@ function scholarship(a, b) {
   w22.setAttribute("id", "w22");
   var w32 = document.createElement("span");
   w32.setAttribute("id", "w32");
+  var wlink = document.createElement("a");
+  wlink.setAttribute("id", "a_link");
 
   w11.style.color = "cornflowerblue";
   w21.style.color = "cornflowerblue";
@@ -221,9 +239,20 @@ function scholarship(a, b) {
 
   if (link != "nan") {
     w22.innerHTML = `: ${link}`;
+    wlink.setAttribute("href", `http://${link}`);
+    wlink.setAttribute("target", "_blank");
     wu.appendChild(w2);
     w2.appendChild(w21);
-    w2.appendChild(w22);
+    w2.appendChild(wlink);
+    wlink.appendChild(w22);
+  } else if (link == "nan") {
+    w22.innerHTML = `: 고려대학교 포털`;
+    wlink.setAttribute("href", `https://portal.korea.ac.kr/front/Intro.kpd`);
+    wlink.setAttribute("target", "_blank");
+    wu.appendChild(w2);
+    w2.appendChild(w21);
+    w2.appendChild(wlink);
+    wlink.appendChild(w22);
   }
 
   if (feature != "nan" && feature_other == "nan") {

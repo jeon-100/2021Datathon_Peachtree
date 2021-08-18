@@ -5,7 +5,7 @@
     <title>당신을 위한 장학금, 당장</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <link
       rel="stylesheet"
       type="text/css"
@@ -82,7 +82,7 @@
         </div>
         <div class='w-u' id='w_u'>
           <div id='w1'><span id='w11' style='color: cornflowerblue;'>기타 사항</span><span id='w12'></span></div>
-          <div id='w2'><span id='w21' style='color: cornflowerblue;'>신청 링크</span><span id='w22'></span></div>
+          <div id='w2'><span id='w21' style='color: cornflowerblue;'>신청 링크</span><a id='a_link'><span id='w22'></span></a></div>
           <div id='w3'><span id='w31' style='color: cornflowerblue;'>관련 장학금 태그</span><span id='w32'></span></div>
         </div>
       </ol>
@@ -120,6 +120,7 @@
                   type="text"
                   id="info_name"
                   size="6"
+                  
                   placeholder="홍길등"
                 />
 
@@ -129,6 +130,7 @@
                   type="text"
                   id="info_age"
                   size="2"
+                  
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                   placeholder="23"
                 />
@@ -145,6 +147,7 @@
                   type="text"
                   id="info_id"
                   size="10"
+                  
                   placeholder="2020170800"
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                 />
@@ -393,6 +396,7 @@
                   id="info_score1"
                   size="2"
                   placeholder="4.5"
+                  
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                 />
                 전체 학기 평균 학점:
@@ -402,6 +406,7 @@
                   id="info_score2"
                   size="2"
                   placeholder="4.5"
+                  
                   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                 />
                 지역:
@@ -450,6 +455,7 @@
           </div>
         </div>
       </div>
+      <div id="before_search"><img id="bs" src="./public/img/before_img.png"></div>
       <div id="sub_container">
         
         <div id="menu">
